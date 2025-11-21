@@ -134,6 +134,11 @@ export default function QuickEstimator() {
                     <button className="w-full py-3 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(14,165,233,0.5)]">
                         {t.quick.cta}
                     </button>
+
+                    <div className="mt-6 space-y-3">
+                        <h4 className="text-sm font-semibold text-muted-foreground">Recommended Articles</h4>
+                        <div id="container-f90c4e368f493b06f5c3392c4b6097ed" className="overflow-hidden rounded-xl border border-white/10 bg-card/40" />
+                    </div>
                 </div>
 
                 {/* Background decorative elements */}

@@ -38,7 +38,7 @@ function MainContent() {
 
             {/* Demo Slider for Visualization */}
             <div className="p-6 glass-card rounded-xl space-y-4">
-              <label className="text-sm font-medium">Demo System Size: {demoKw} kW</label>
+              <label className="text-sm font-medium">सिस्टम का साइज़ (System Size): {demoKw} kW</label>
               <input
                 type="range"
                 min="0.5"

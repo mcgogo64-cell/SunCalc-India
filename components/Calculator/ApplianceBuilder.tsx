@@ -58,7 +58,7 @@ export default function ApplianceBuilder() {
     };
 
     return (
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 pb-64 md:pb-0">
             {/* Appliance List */}
             <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-muted-foreground mb-4">{t.appliance.add}</h3>
@@ -101,8 +101,13 @@ export default function ApplianceBuilder() {
             </div>
 
             {/* Power Meter & Result */}
-            <div className="flex flex-col justify-center space-y-8">
-                <div className="glass-card rounded-2xl p-6 space-y-6">
+            <div className="flex flex-col justify-center">
+                <div
+                    className={cn(
+                        "glass-card rounded-2xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)]",
+                        "fixed inset-x-4 bottom-4 z-40 md:static md:inset-auto md:shadow-lg"
+                    )}
+                >
                     <div className="flex items-center justify-between">
                         <h3 className="font-semibold flex items-center gap-2">
                             <Zap className="w-5 h-5 text-secondary" />

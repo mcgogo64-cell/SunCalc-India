@@ -25,6 +25,12 @@ export default function HouseModel({ kw }: HouseModelProps) {
                     priority
                 />
 
+                {/* Masks to hide the badge and cutoff text */}
+                <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-background via-background/95 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/95 to-transparent" />
+                </div>
+
                 {/* Overlay Zones - Positioned relative to the image */}
                 {/* Note: These positions are approximate based on the prompt description. 
             In a real scenario, we'd fine-tune these coordinates. */}
