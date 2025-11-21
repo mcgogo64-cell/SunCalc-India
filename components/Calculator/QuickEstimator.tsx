@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { IndianRupee, Sun, Info } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/i18n";
 
 const STATES = [
@@ -19,6 +17,8 @@ export default function QuickEstimator() {
     const [state, setState] = useState("Maharashtra");
     const [systemSize, setSystemSize] = useState(0);
     const [subsidy, setSubsidy] = useState(0);
+    const [stateSubsidy, setStateSubsidy] = useState(0);
+    const [stateSubsidyLabel, setStateSubsidyLabel] = useState("");
     const [netCost, setNetCost] = useState(0);
     const { t } = useLanguage();
 
@@ -44,10 +44,30 @@ export default function QuickEstimator() {
         // Cap subsidy at market price (unlikely but safe)
         if (calculatedSubsidy > marketPrice) calculatedSubsidy = marketPrice;
 
-        setSubsidy(calculatedSubsidy);
-        setNetCost(marketPrice - calculatedSubsidy);
+        // State-specific subsidy/bonus logic
+        let bonus = 0;
+        let bonusLabel = "";
 
-    }, [bill]);
+        if (state === "Maharashtra" && units < 100 && requiredKw >= 1 && requiredKw <= 2) {
+            bonus = 45000;
+            bonusLabel = "Maharashtra Govt Bonus";
+        } else if (state === "Uttar Pradesh") {
+            bonus = Math.min(requiredKw * 15000, 30000);
+            if (bonus > 0) bonusLabel = "UP State Bonus";
+        } else if (state === "Delhi") {
+            bonus = requiredKw * 2000;
+            if (bonus > 0) bonusLabel = "Delhi State Bonus";
+        }
+
+        // Avoid negative values if bonus exceeds remaining cost
+        const cappedBonus = Math.min(bonus, Math.max(marketPrice - calculatedSubsidy, 0));
+
+        setSubsidy(calculatedSubsidy);
+        setStateSubsidy(cappedBonus);
+        setStateSubsidyLabel(bonusLabel);
+        setNetCost(Math.max(marketPrice - calculatedSubsidy - cappedBonus, 0));
+
+    }, [bill, state]);
 
     return (
         <div className="grid md:grid-cols-2 gap-8">
@@ -86,7 +106,7 @@ export default function QuickEstimator() {
                         {/* Glow effect behind slider thumb could be added with custom CSS, keeping simple for now */}
                     </div>
                     <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>₹500</span>
+                        <span>₹1,500</span>
                         <span>₹15,000+</span>
                     </div>
                 </div>
@@ -123,6 +143,14 @@ export default function QuickEstimator() {
                             </span>
                             <span>- ₹{subsidy.toLocaleString()}</span>
                         </div>
+                        {stateSubsidy > 0 && (
+                            <div className="flex justify-between text-sm text-green-400 font-medium">
+                                <span className="flex items-center gap-1">
+                                    राज्य सब्सिडी (State Subsidy){stateSubsidyLabel ? ` • ${stateSubsidyLabel}` : ""}
+                                </span>
+                                <span>- ₹{stateSubsidy.toLocaleString()}</span>
+                            </div>
+                        )}
                         <div className="flex justify-between items-end pt-2">
                             <span className="text-sm font-medium">{t.quick.netCost}</span>
                             <span className="text-2xl font-bold text-secondary">
