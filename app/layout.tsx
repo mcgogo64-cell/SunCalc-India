@@ -73,6 +73,20 @@ export default function RootLayout({
           data-cfasync="false"
         />
         <Script
+          id="ga-gtag"
+          src="https://www.googletagmanager.com/gtag/js?id=G-EP0JE1GR4C"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga-gtag-init"
+          strategy="afterInteractive"
+        >{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EP0JE1GR4C');
+        `}</Script>
+        <Script
           id="faq-schema"
           type="application/ld+json"
           strategy="beforeInteractive"
