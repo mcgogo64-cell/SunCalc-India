@@ -59,6 +59,7 @@ export default function ApplianceBuilder() {
     };
 
     return (
+        <>
         <div className="grid md:grid-cols-2 gap-8 pb-64 md:pb-0">
             {/* Appliance List */}
             <div className="space-y-4">
@@ -192,5 +193,6 @@ export default function ApplianceBuilder() {
                 </div>
             </div>
         )}
+        </>
     );
 }
