@@ -19,6 +19,7 @@ interface Translations {
         subsidy: string;
         netCost: string;
         cta: string;
+        pricingCta?: string;
     };
     appliance: {
         add: string;
@@ -33,6 +34,14 @@ interface Translations {
             ac: string;
             pump: string;
         };
+    };
+    pricingModal?: {
+        title: string;
+        systemSize: string;
+        approxCost: string;
+        note: string;
+        gotIt: string;
+        close: string;
     };
     visualization: {
         title: string;
@@ -78,7 +87,8 @@ const translations: Record<Language, Translations> = {
             marketPrice: "Market Price (Approx)",
             subsidy: "PM Surya Ghar Subsidy",
             netCost: "Your Net Cost",
-            cta: "Get Detailed Quote"
+            cta: "Get Detailed Quote",
+            pricingCta: "See Pricing"
         },
         appliance: {
             add: "Add your appliances",
@@ -93,6 +103,14 @@ const translations: Record<Language, Translations> = {
                 ac: "AC (1.5 Ton)",
                 pump: "Water Pump"
             }
+        },
+        pricingModal: {
+            title: "Pricing Preview",
+            systemSize: "System Size",
+            approxCost: "Approx. Cost (Turnkey)",
+            note: "Prices are indicative for standard rooftop installs. Final quote may vary by panels, inverter brand, and structure complexity. Subsidy (PM Surya Ghar + state, if available) will further reduce this.",
+            gotIt: "Got it",
+            close: "Close"
         },
         visualization: {
             title: "See It In Action",
@@ -124,57 +142,66 @@ const translations: Record<Language, Translations> = {
         footer: { rights: "All rights reserved." }
     },
     hi: {
-        title: "सौर खोज इंजन",
-        subtitle: "सेकंड में अपनी सौर क्षमता की गणना करें।",
+        title: "सोलर डिस्कवरी इंजन",
+        subtitle: "कुछ ही सेकंड में अपना सोलर पोटेंशियल जानें।",
         toggle: { quick: "त्वरित अनुमान", appliance: "उपकरण कैलकुलेटर" },
         quick: {
             state: "राज्य चुनें",
             bill: "मासिक बिजली बिल",
             recommendation: "अनुशंसित सिस्टम",
-            marketPrice: "बाजार मूल्य (अनुमानित)",
+            marketPrice: "बाज़ार मूल्य (अनुमानित)",
             subsidy: "पीएम सूर्य घर सब्सिडी",
             netCost: "आपकी शुद्ध लागत",
-            cta: "विस्तृत कोट प्राप्त करें"
+            cta: "विस्तृत कोट प्राप्त करें",
+            pricingCta: "कीमत देखें"
         },
         appliance: {
             add: "अपने उपकरण जोड़ें",
-            powerLoad: "बिजली का भार",
-            capacity: "सौर प्रणाली क्षमता",
-            approximate: "आपको लगभग आवश्यकता है",
+            powerLoad: "पावर लोड",
+            capacity: "सोलर सिस्टम क्षमता",
+            approximate: "आपको लगभग",
             cta: "कीमत देखें",
             items: {
-                fan: "छत का पंखा",
+                fan: "सीलिंग फैन",
                 light: "एलईडी ट्यूब लाइट",
                 fridge: "फ्रिज",
                 ac: "एसी (1.5 टन)",
-                pump: "पानी की मोटर"
+                pump: "वॉटर पंप"
             }
         },
+        pricingModal: {
+            title: "प्राइसिंग प्रीव्यू",
+            systemSize: "सिस्टम साइज",
+            approxCost: "अनुमानित लागत (टर्नकी)",
+            note: "कीमतें अनुमानित हैं; पैनल/इन्वर्टर ब्रांड और स्ट्रक्चर के अनुसार बदल सकती हैं। पीएम सूर्य घर और राज्य सब्सिडी इसे और घटाएगी।",
+            gotIt: "ठीक है",
+            close: "बंद करें"
+        },
         visualization: {
-            title: "इसे काम करते हुए देखें",
-            subtitle: "बस अनुमान न लगाएं। देखें कि सौर प्रणाली वास्तव में आपके घर में क्या चला सकती है।",
-            caption: "एक {kw}kW सिस्टम इन क्षेत्रों को एक साथ चलाता है।",
-            green: "हरित ऊर्जा",
+            title: "कैसे काम करता है",
+            subtitle: "सिर्फ अनुमान नहीं—देखें कि सोलर सिस्टम आपके घर में किन ज़ोन्स को चला सकता है।",
+            caption: "{kw}kW सिस्टम एक साथ ये ज़ोन चलाता है।",
+            green: "ग्रीन एनर्जी",
             warranty: "वारंटी"
         },
         checklist: {
-            title: "सब्सिडी के लिए तैयार हो जाएं",
-            subtitle: "पीएम सूर्य घर योजना के लिए विशिष्ट दस्तावेजों की आवश्यकता होती है।",
-            ready: "आप आवेदन करने के लिए तैयार हैं!",
-            chance: "मंजूरी की संभावना अधिक है।",
+            title: "सब्सिडी के लिए तैयार",
+            subtitle: "पीएम सूर्य घर योजना कुछ दस्तावेज़ मांगती है।",
+            ready: "आप आवेदन के लिए तैयार हैं!",
+            chance: "स्वीकृति की संभावना ऊंची है।",
             items: {
-                aadhaar: "मोबाइल से लिंक आधार कार्ड",
-                bill: "नवीनतम बिजली बिल",
-                roof: "छत की फोटो (साफ दृश्य)",
+                aadhaar: "आधार कार्ड (मोबाइल से लिंक)",
+                bill: "ताज़ा बिजली बिल",
+                roof: "छत की फ़ोटो (साफ़ दृश्य)",
                 bank: "बैंक खाता विवरण"
             }
         },
         faq: {
             title: "अक्सर पूछे जाने वाले प्रश्न",
             items: {
-                q1: "क्या सब्सिडी सीधे मेरे बैंक में आएगी?", a1: "हां, पीएम सूर्य घर योजना के तहत, सब्सिडी सीधे आपके आधार से जुड़े बैंक खाते में स्थानांतरित की जाती है।",
-                q2: "मुझे कितनी छत की जगह चाहिए?", a2: "आमतौर पर, 1 किलोवाट के लिए लगभग 100 वर्ग फुट छाया-मुक्त छत क्षेत्र की आवश्यकता होती है।",
-                q3: "सौर पैनलों पर वारंटी क्या है?", a3: "अधिकांश टियर-1 सौर पैनल 25 साल की प्रदर्शन वारंटी के साथ आते हैं।"
+                q1: "सब्सिडी सीधे बैंक में आएगी?", a1: "हाँ, पीएम सूर्य घर में सब्सिडी सीधे आपके आधार-लिंक्ड बैंक खाते में आती है।",
+                q2: "कितनी छत चाहिए?", a2: "लगभग 1 kW के लिए 100 वर्ग फुट छाया-रहित स्थान चाहिए।",
+                q3: "सोलर पैनल की वारंटी क्या है?", a3: "अधिकांश टियर-1 पैनल 25 साल की परफॉर्मेंस वारंटी देते हैं।"
             }
         },
         footer: { rights: "सर्वाधिकार सुरक्षित।" }
