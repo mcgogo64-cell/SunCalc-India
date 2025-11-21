@@ -26,6 +26,7 @@ export default function ApplianceBuilder() {
     });
     const [totalLoad, setTotalLoad] = useState(0);
     const [recommendedKw, setRecommendedKw] = useState(0);
+    const [showPrice, setShowPrice] = useState(false);
 
     useEffect(() => {
         let load = 0;
@@ -144,11 +145,52 @@ export default function ApplianceBuilder() {
                         <p className="text-sm text-muted-foreground mt-2">{t.appliance.capacity}</p>
                     </div>
 
-                    <button className="w-full py-3 mt-4 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)]">
+                    <button
+                        className="w-full py-3 mt-4 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)]"
+                        onClick={() => setShowPrice(true)}
+                    >
                         {t.appliance.cta}
                     </button>
                 </div>
             </div>
         </div>
+
+        {showPrice && (
+            <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                <div className="w-full max-w-md bg-card/90 border border-white/10 rounded-2xl shadow-2xl p-6 space-y-4 animate-in fade-in zoom-in-50 duration-200">
+                    <div className="flex items-center justify-between">
+                        <h4 className="text-lg font-semibold text-foreground">Pricing Preview</h4>
+                        <button
+                            onClick={() => setShowPrice(false)}
+                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            Close
+                        </button>
+                    </div>
+                    <div className="rounded-xl border border-white/5 bg-background/60 p-4 space-y-2">
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>System Size</span>
+                            <span className="font-semibold text-foreground">{recommendedKw} kW</span>
+                        </div>
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>Approx. Cost (Turnkey)</span>
+                            <span className="font-semibold text-secondary">
+                                ₹{Math.round(recommendedKw * 50000).toLocaleString()}
+                            </span>
+                        </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                        Prices are indicative for standard rooftop installs. Final quote may vary by panels, inverter brand,
+                        and structure complexity. Subsidy (PM Surya Ghar + state, if available) will further reduce this.
+                    </p>
+                    <button
+                        className="w-full py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all"
+                        onClick={() => setShowPrice(false)}
+                    >
+                        Got it
+                    </button>
+                </div>
+            </div>
+        )}
     );
 }
