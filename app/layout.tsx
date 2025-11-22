@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const SITE_URL = "https://suncalindia.vercel.app";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -53,6 +54,10 @@ const faqSchema = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: SITE_URL,
+  },
   title: "PM Surya Ghar 2025: Subsidy Apply Kaise Kare? | 1-3kW Solar Kitna Kharcha? – SunCalc",
   description:
     "Bijli bill zero karna hai? Check karein aapko ₹78,000 tak PM Surya Ghar subsidy milegi ya nahi. 1kW-3kW solar price list, ROI aur installation steps ek jagah. Abhi free calculator try karein!",

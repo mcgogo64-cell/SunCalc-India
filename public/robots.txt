@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://suncalindia.vercel.app/sitemap.xml
